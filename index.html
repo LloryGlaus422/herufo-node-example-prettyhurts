@@ -185,11 +185,11 @@
   }
 
   #first{
-    background-color: violet;
+    background-color:violet;
   }
 
   #second{
-    background-color: violet;
+   background-color: violet;
   }
   .modal-body{
         border-style: dashed;
@@ -310,24 +310,14 @@
       });
     })
 
-    $(function () {
-      // variables
-      const socket = io();
-      const messageForm = document.getElementById('send-conatainer')
-      const messageInput = document.getElementById('message-input')
-      const messageContainer = document.getElementById('message-container')
-      const UserContainer = document.getElementById('online')
-      const users = [];
-
-
-      // getting the value of Username
-      $("#try").click(function () {
-            const namei = $('#usr').val();
-            socket.emit('newuser', { name: namei });
-            socket.emit('userconnected', { name: namei });       
+    // getting the value of Username
+    $("#try").click(function () {
+        const namei = $('#usr').val();
+        socket.emit('newuser', { name: namei });
+        socket.emit('userconnected', { name: namei });
       })
 
-      // const namei = $('#username').val()
+      const namei = $('#username').val()
       users.push(namei);
       // Notify that the user join
       appendMessage('you joined');
@@ -380,7 +370,6 @@
         newUser.innerText = name;
         UserContainer.append(newUser);
       }
-
 
     })
 
