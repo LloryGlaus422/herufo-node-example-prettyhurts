@@ -341,7 +341,6 @@
       $('form').submit(function (e) {
         e.preventDefault()
         const message = messageInput.value
-        $('#message-input').val('typing ........');
         socket.emit('chatmessage', { name: namei, msg: message });
         $('#message-input').val('');
         return false;
