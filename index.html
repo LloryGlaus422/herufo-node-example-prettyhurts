@@ -176,11 +176,28 @@
   }
 
   #heade {
-    background-color: blue;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu310C7fQ0t1QhO1WiUxgO56g1syRnz5CjcXk82mRUiKr0SxwS");
+    
   }
   #chat{
-   
     margin-top: 25%;
+  }
+
+  #first{
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXEahbkXBdXGrElDfDIXC5Jt9xwBsYUG8595f3QVubbxzIH74M8g");
+      background-size: cover;
+      background-repeat: no-repeat;
+  }
+
+  #second{
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXEahbkXBdXGrElDfDIXC5Jt9xwBsYUG8595f3QVubbxzIH74M8g");
+    background-size: cover;
+      background-repeat: no-repeat;
+  }
+  .modal-body{
+        border-style: dashed;
+        border-color: blue;
+        border:"5";
   }
 </style>
 </head>
@@ -241,7 +258,7 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="card">
-          <div class="card-body">
+          <div id = "first" class="card-body">
             <a href="#" class="btn btn-primary">Active Users</a>
             <br> <br>
             <br>
@@ -252,7 +269,7 @@
       </div>
       <div class="col-sm-6">
         <div class="card">
-          <div class="card-body">
+          <div id = "second"class="card-body">
             <center>
               </cente><a href="#" class="btn btn-primary">Chat Here</a></center>
             <br> <br>
@@ -308,9 +325,14 @@
 
       // getting the value of Username
       $("#try").click(function () {
-        const namei = $('#usr').val();
-        socket.emit('newuser', { name: namei });
-        socket.emit('userconnected', { name: namei });
+            if ($('#usr').val() = "") {
+                 alert("Please Input a username") 
+            } else {
+                  const namei = $('#usr').val();
+            socket.emit('newuser', { name: namei });
+            socket.emit('userconnected', { name: namei });
+            }
+        
       })
 
       const namei = $('#username').val()
