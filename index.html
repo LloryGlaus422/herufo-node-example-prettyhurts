@@ -176,7 +176,7 @@
   }
 
   #heade {
-    background-image:url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0_9Y8hfyAJrIkXBZrRPqZiXL0wIkS3i2nnU7VJkxVg10IM2bL");
+    background-image:url();
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -310,9 +310,6 @@
 
       // getting the value of Username
       $("#try").click(function () {
-            if($('#usr').val() = ""){
-                  alert("Provide Username!");
-            }else{
         const namei = $('#usr').val();
         socket.emit('newuser', { name: namei });
         socket.emit('userconnected', { name: namei });
@@ -369,7 +366,7 @@
         newUser.innerText = name;
         UserContainer.append(newUser);
       }
-            }
+
 
     })
 })
