@@ -301,7 +301,7 @@
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script>
 // show and hide the UI 
-    $(document).ready(function () {
+$(document).ready(function () {
       $("#try").click(function () {
         $(".f").hide();
         $(".id2").show();
@@ -309,6 +309,7 @@
         $("#try2").hide();
       });
     })
+
     $(function () {
       // variables
       const socket = io();
@@ -318,8 +319,9 @@
       const UserContainer = document.getElementById('online')
       const users = [];
 
-    // getting the value of Username
-    $("#try").click(function () {
+
+      // getting the value of Username
+      $("#try").click(function () {
         const namei = $('#usr').val();
         socket.emit('newuser', { name: namei });
         socket.emit('userconnected', { name: namei });
@@ -378,6 +380,7 @@
         newUser.innerText = name;
         UserContainer.append(newUser);
       }
+
 
     })
 
