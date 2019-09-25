@@ -325,14 +325,14 @@
             if ($('#usr').val() = "") {
                  alert("Please Input a username") 
             } else {
-                  const namei = $('#usr').val();
+            const namei = $('#usr').val();
             socket.emit('newuser', { name: namei });
             socket.emit('userconnected', { name: namei });
             }
         
       })
 
-      const namei = $('#username').val()
+      // const namei = $('#username').val()
       users.push(namei);
       // Notify that the user join
       appendMessage('you joined');
