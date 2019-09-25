@@ -77,10 +77,14 @@
 
   .left {
     text-align: left;
+    font-family: Arial;
+    font-size: 18 px;
   }
 
   .right {
     text-align: right;
+    font-family: Arial;
+    font-size: 18 px;
   }
 
   .container {
@@ -195,6 +199,21 @@
         border-style: dashed;
         border-color: blue;
         border:"5";
+  }
+
+  .class{
+        font-size: 18px;
+        font-family: Arial;
+  }
+
+  .connected{
+        font-size: 18px;
+        font-family: Arial;
+  }
+
+  .new{
+      font-size: 18px;
+        font-family: Arial;
   }
 </style>
 </head>
@@ -335,17 +354,17 @@
       const namei = $('#username').val()
       users.push(namei);
       // Notify that the user join
-      appendMessage('you joined');
+      appendMessage('you joined', "class");
      
       // putting up a nickname
       socket.on('newuser', data => {
-        addUser(data.name + ' is active');
+        addUser(data.name + ' is active',"new");
         console.log(data.name)
       })
 
       // Message that a user is connected
       socket.on('userconnected', data => {
-        appendMessage(data.name + ' :' + ' connected');
+        appendMessage(data.name + ' :' + ' connected', "connected");
       })
 
       // if a message is inputed in the user it sends to right and left to the reciever
@@ -380,8 +399,9 @@
       }
 
         // creating a container for the active users
-      function addUser(name) {
+      function addUser(name, cls) {
         const newUser = document.createElement('div')
+        messageElement.classList.add(cls);
         newUser.innerText = name;
         UserContainer.append(newUser);
       }
