@@ -311,9 +311,7 @@
         const namei = $('#usr').val();
         socket.emit('newuser', { name: namei });
         socket.emit('userconnected', { name: namei });
-      })
-
-      const namei = $('#usr').val()
+      
       users.push(namei);
       // Notify that the user join
       appendMessage('you joined');
@@ -369,6 +367,7 @@
 
 
     })
+})
 
 
   </script>
