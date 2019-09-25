@@ -309,6 +309,14 @@
         $("#try2").hide();
       });
     })
+    $(function () {
+      // variables
+      const socket = io();
+      const messageForm = document.getElementById('send-conatainer')
+      const messageInput = document.getElementById('message-input')
+      const messageContainer = document.getElementById('message-container')
+      const UserContainer = document.getElementById('online')
+      const users = [];
 
     // getting the value of Username
     $("#try").click(function () {
