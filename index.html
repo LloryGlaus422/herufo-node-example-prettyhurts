@@ -322,14 +322,9 @@
 
       // getting the value of Username
       $("#try").click(function () {
-            if ($('#usr').val() = "") {
-                 alert("Please Input a username") 
-            } else {
             const namei = $('#usr').val();
             socket.emit('newuser', { name: namei });
-            socket.emit('userconnected', { name: namei });
-            }
-        
+            socket.emit('userconnected', { name: namei });       
       })
 
       // const namei = $('#username').val()
