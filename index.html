@@ -77,14 +77,10 @@
 
   .left {
     text-align: left;
-    font-family: Arial;
-    font-size: 18 px;
   }
 
   .right {
     text-align: right;
-    font-family: Arial;
-    font-size: 18 px;
   }
 
   .container {
@@ -193,7 +189,7 @@
   }
 
   #second{
-      background-color: violet;
+    background-color: violet;
   }
   .modal-body{
         border-style: dashed;
@@ -339,7 +335,7 @@
       const namei = $('#username').val()
       users.push(namei);
       // Notify that the user join
-      appendMessage('you joined', "class");
+      appendMessage('you joined');
      
       // putting up a nickname
       socket.on('newuser', data => {
