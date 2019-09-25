@@ -200,21 +200,6 @@
         border-color: blue;
         border:"5";
   }
-
-  .class{
-        font-size: 18px;
-        font-family: Arial;
-  }
-
-  .connected{
-        font-size: 18px;
-        font-family: Arial;
-  }
-
-  .new{
-      font-size: 18px;
-        font-family: Arial;
-  }
 </style>
 </head>
 
@@ -358,7 +343,7 @@
      
       // putting up a nickname
       socket.on('newuser', data => {
-        addUser(data.name + ' is active',"new");
+        addUser(data.name + ' is active');
         console.log(data.name)
       })
 
@@ -399,9 +384,8 @@
       }
 
         // creating a container for the active users
-      function addUser(name, clse) {
+      function addUser(name) {
         const newUser = document.createElement('div')
-        messageElement.classList.add(clse);
         newUser.innerText = name;
         UserContainer.append(newUser);
       }
