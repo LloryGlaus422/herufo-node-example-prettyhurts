@@ -310,11 +310,9 @@
       $("#try").click(function () {
         const namei = $('#usr').val();
         socket.emit('newuser', { name: namei });
-        socket.emit('userconnected', { name: namei });
-      })
+        socket.emit('chatmessage', { name: namei });
 
-      const namei = $('#username').val()
-      users.push(namei);
+      })
       // Notify that the user join
       appendMessage('you joined');
      
