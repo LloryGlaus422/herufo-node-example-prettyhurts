@@ -1,0 +1,30 @@
+{
+  "name": "herufo-node-example-prettyhurts",
+  "version": "1.0.0",
+  "description": "A simple and engaging node up deployed in herufo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LloryGlaus422/herufo-node-example-prettyhurts.git"
+  },
+  "keywords": [
+    "node",
+    "heruko"
+  ],
+  "author": "Lorly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LloryGlaus422/herufo-node-example-prettyhurts/issues"
+  },
+  "homepage": "https://github.com/LloryGlaus422/herufo-node-example-prettyhurts#readme",
+  "engines":{
+    "node":"10.16"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+
+}

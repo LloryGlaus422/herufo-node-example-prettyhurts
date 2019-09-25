@@ -1,0 +1,377 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<title>Socket.IO chat</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font: 13px Helvetica, Arial;
+    /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTykqC_SVoUHPg7CHLJi-5oGuIkGFbqmvHZy6yDfZVAf9mWJmreDQ"); */
+    /* background-size: 500px; */
+    background-color: black;
+  }
+
+  form {
+    background: #000;
+    padding: 3px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+  form input {
+    border: 0;
+    padding: 10px;
+    width: 90%;
+    margin-right: .5%;
+  }
+
+  form button {
+    width: 9%;
+    background: rgb(130, 224, 255);
+    border: none;
+    padding: 10px;
+  }
+
+  #messages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  #messages li {
+    padding: 5px 10px;
+  }
+
+  #messages li:nth-child(odd) {
+    background: #eee;
+  }
+
+  #messages {
+    margin-bottom: 40px
+  }
+
+  #heade {
+    background-color: mediumblue;
+    color: white;
+  }
+
+
+  .left {
+    text-align: left;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: 500px;
+    margin-right: 500px;
+  }
+
+  .darker {
+    border-color: #ccc;
+    background-color: #ddd;
+  }
+
+  .container::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .centered {
+    position: absolute;
+    margin-top: 90px;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+  }
+
+  .sml-10 {
+    width: 220px;
+  }
+
+  .text-field {
+    margin-bottom: 30px;
+  }
+
+  .input {
+    position: relative;
+  }
+
+  input {
+    height: 20px;
+    width: 255px;
+    border: none;
+    outline: none;
+    color: #797979;
+  }
+
+  /* .line{
+    .transition(all 150ms ease-in-out);
+    stroke:#dadada;
+  } */
+
+  .content {
+    position: absolute;
+    margin: auto;
+    height: 50px;
+    width: 260px;
+    top: 50px;
+    left: 0px;
+    right: 0px;
+  }
+
+  .id,
+  .id2 {
+    display: none;
+  }
+
+  fieldset {
+    border: 1px solid #ddd !important;
+    margin: 0;
+    padding: 10px;
+    position: relative;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    padding-left: 10px !important;
+  }
+
+  legend {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    width: 35%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px 5px 5px 10px;
+    background-color: #ffffff;
+  }
+
+  #heade {
+    background-color: blue;
+  }
+  #chat{
+   
+    margin-top: 25%;
+  }
+</style>
+</head>
+
+<body>
+
+<div id ="try2">
+  <div id ="messanger">
+    <img style="margin-left: 30% ;float:left; margin-top: 10%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCbvev-sQCG7U0Pdwt6XELQtFLQpH7NRqgLvu6vMX3Wvo_EcCCVQ" alt="picture">
+  <button  id = "chat" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Chat Now
+  </button>
+</div>
+
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Provide your Username</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="usr">Username:</label>
+            <!-- id = "username" -->
+            <input type="text" class="form-control" id="usr">
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" id="try" class="btn btn-danger" data-dismiss="modal">Send</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+  <!-- </div>
+    <button style = "margin-top: 25%;margin-left: 50%" type="button" id = "try" class="btn btn-primary">Chat Now</button>
+  </div> -->
+
+
+  <div class="id2">
+    <div id='heade' class="jumbotron text-center">
+      <h1>Welcome to Messenger</h1>
+      <p>Find someone to chat now!</p>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <a href="#" class="btn btn-primary">Active Users</a>
+            <br> <br>
+            <br>
+            <div id='online'>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <center>
+              </cente><a href="#" class="btn btn-primary">Chat Here</a></center>
+            <br> <br>
+            <div id='message-container'>
+            </div>
+            <!-- <ul id="messages"></ul> -->
+            <form id='send-container'>
+                <div class="input-group mb-3 input-group-lg">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Type Message</span>
+                    </div>
+                    <input id="message-input" type="text" class="form-control">
+                  </div>
+              <!-- <input id="message-input" autocomplete="off" /><button id='send-button'>Send</button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+// show and hide the UI 
+    $(document).ready(function () {
+      $("#try").click(function () {
+        $(".f").hide();
+        $(".id2").show();
+        $('#try').hide();
+        $("#try2").hide();
+      });
+    })
+
+    $(function () {
+      // variables
+      const socket = io();
+      const messageForm = document.getElementById('send-conatainer')
+      const messageInput = document.getElementById('message-input')
+      const messageContainer = document.getElementById('message-container')
+      const UserContainer = document.getElementById('online')
+      const users = [];
+
+
+      // getting the value of Username
+      $("#try").click(function () {
+        const namei = $('#usr').val();
+        socket.emit('newuser', { name: namei });
+        socket.emit('userconnected', { name: namei });
+      })
+
+      const namei = $('#username').val()
+      users.push(namei);
+      // Notify that the user join
+      appendMessage('you joined');
+     
+      // putting up a nickname
+      socket.on('newuser', data => {
+        addUser(data.name + ' is active');
+        console.log(data.name)
+      })
+
+      // Message that a user is connected
+      socket.on('userconnected', data => {
+        appendMessage(data.name + ' :' + ' connected');
+      })
+
+      // if a message is inputed in the user it sends to right and left to the reciever
+      socket.on('chatmessage', data => {
+        if (data.name == namei) {
+          appendMessage(data.msg, "right");
+        } else {
+          appendMessage(data.name + ": " + data.msg, "left");
+        }
+
+      })
+
+      // when message is submitted
+      $('form').submit(function (e) {
+        e.preventDefault()
+        const message = messageInput.value
+        $('#message-input').val('typing ........');
+        socket.emit('chatmessage', { name: namei, msg: message });
+        $('#message-input').val('');
+        return false;
+      })
+
+
+
+
+      // creating another container for the message
+      function appendMessage(message, cls) {
+        const messageElement = document.createElement('div')
+        messageElement.classList.add(cls);
+        messageElement.innerText = message
+        messageContainer.append(messageElement)
+      }
+
+        // creating a container for the active users
+      function addUser(name) {
+        const newUser = document.createElement('div')
+        newUser.innerText = name;
+        UserContainer.append(newUser);
+      }
+
+
+    })
+
+
+  </script>
+</body>
+
+</html>
