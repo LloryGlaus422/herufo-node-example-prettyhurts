@@ -364,7 +364,7 @@
 
       // Message that a user is connected
       socket.on('userconnected', data => {
-        appendMessage(data.name + ' :' + ' connected', "connected");
+        appendMessage(data.name + ' :' + ' connected');
       })
 
       // if a message is inputed in the user it sends to right and left to the reciever
@@ -399,9 +399,9 @@
       }
 
         // creating a container for the active users
-      function addUser(name, cls) {
+      function addUser(name, clse) {
         const newUser = document.createElement('div')
-        messageElement.classList.add(cls);
+        messageElement.classList.add(clse);
         newUser.innerText = name;
         UserContainer.append(newUser);
       }
