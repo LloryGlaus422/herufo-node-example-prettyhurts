@@ -311,8 +311,10 @@
         const namei = $('#usr').val();
         socket.emit('newuser', { name: namei });
         socket.emit('userconnected', { name: namei });
-        socket.emit('chatmessage', { name: namei, msg: message });
       })
+
+      const namei = $('#usr').val()
+      users.push(namei);
       // Notify that the user join
       appendMessage('you joined');
      
@@ -341,6 +343,7 @@
       $('form').submit(function (e) {
         e.preventDefault()
         const message = messageInput.value
+        $('#message-input').val('typing ........');
         socket.emit('chatmessage', { name: namei, msg: message });
         $('#message-input').val('');
         return false;
